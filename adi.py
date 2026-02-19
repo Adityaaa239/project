@@ -1,18 +1,29 @@
 # Step 1: Import libraries
 import numpy as np
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LogisticRegression
 
-# Step 2: Create dataset (Years of Experience vs Salary)
-X = np.array([[1], [2], [3], [4], [5]])   # Input (2D array)
-y = np.array([20000, 40000, 60000, 80000, 100000])  # Output
+# Step 2: Create dataset
+# [Glucose level, BMI]
+X = np.array([
+    [85, 22],
+    [90, 25],
+    [150, 35],
+    [130, 30],
+    [70, 20],
+    [160, 40]
+])
+
+# Output (0 = No diabetes, 1 = Diabetes)
+y = np.array([0, 0, 1, 1, 0, 1])
 
 # Step 3: Create model
-model = LinearRegression()
+model = LogisticRegression()
 
 # Step 4: Train model
 model.fit(X, y)
 
-# Step 5: Predict salary for 6 years experience
-prediction = model.predict([[6]])
+# Step 5: Predict for new person
+# Example: Glucose=140, BMI=33
+prediction = model.predict([[140, 33]])
 
-print("Predicted Salary:", prediction[0])
+print("Diabetes Prediction (0=No, 1=Yes):", prediction[0])
